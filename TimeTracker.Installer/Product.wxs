@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+	<Product Id="*" Name="TimeTraker" Language="1033" Version="1.0.0.0" Manufacturer="Oleh Halay" UpgradeCode="7a53b8f4-c3a0-4bf6-bbac-ef79f57df352">
+		<Package Id="*" InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
+
+		<MajorUpgrade DowngradeErrorMessage="A newer version of TimeTarker is already installed." />
+		<MediaTemplate EmbedCab="yes" />
+
+		<Feature Id="ProductFeature" Title="TimeTracker.Installer" Level="1">
+			<ComponentGroupRef Id="ProductComponents" />
+		</Feature>
+	</Product>
+
+	<Fragment>
+		<Directory Id="TARGETDIR" Name="SourceDir">
+			<Directory Id="ProgramFilesFolder">
+				<Directory Id="INSTALLFOLDER" Name="TimeTracker" />
+			</Directory>
+		</Directory>
+	</Fragment>
+
+	<Fragment>
+		<ComponentGroup Id="ProductComponents" Directory="INSTALLFOLDER">
+      <Component Guid="{0AD28E97-796E-4D08-9C83-09E8975A9944}">
+        <File Source="$(var.TimeTracker.TargetPath)" KeyPath="yes"></File>
+      </Component>
+      <Component Guid="{9C67C8FA-FDA4-41DD-B52A-2E66F7DBC785}">
+        <File Source="$(var.TimerTracker.DataAcess.TargetPath)" KeyPath="yes"></File>
+      </Component>
+      <Component Guid="{973B2FC6-576D-4EF6-9DC6-97C49A3ACE2C}">
+        <File Source="$(var.TimeTracker.Timer.TargetPath)" KeyPath="yes"></File>
+      </Component>
+      <Component Guid="{7990041D-06D9-45BE-863E-545B2F752768}">
+        <File Source="..\TimeTracker\bin\Debug\TimeTracker.exe.config" KeyPath="yes"></File>
+      </Component>
+		</ComponentGroup>
+	</Fragment>
+</Wix>
